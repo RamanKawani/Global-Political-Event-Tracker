@@ -1,22 +1,11 @@
 from flask import Flask, jsonify
-import os
 
-# Initialize the Flask application
 app = Flask(__name__)
 
-# A sample route that returns a list of global political events
 @app.route('/events', methods=['GET'])
 def get_events():
-    events = [
-        {"event": "Global Politics Summit", "date": "2024-12-01"},
-        {"event": "Climate Change Conference", "date": "2024-12-10"}
-    ]
+    events = [{"event": "Global Politics Summit", "date": "2024-12-01"}]
     return jsonify(events)
 
-# Debugging: Print the current working directory to verify the path
-print("Current working directory:", os.getcwd())
-
-# Main block to run the Flask app
 if __name__ == '__main__':
-    # Start Flask with Gunicorn in production or debugging mode
     app.run(debug=True, host='0.0.0.0', port=5000)
