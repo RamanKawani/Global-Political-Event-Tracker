@@ -1,18 +1,22 @@
 from flask import Flask, jsonify
+import os
 
+# Initialize the Flask application
 app = Flask(__name__)
 
-# Example route to get political events
-@app.route('/api/events')
+# A sample route that returns a list of global political events
+@app.route('/events', methods=['GET'])
 def get_events():
-    # This is just sample data; replace with your actual event fetching logic
     events = [
-        {"title": "Global Political Event 1", "publishedAt": "2024-12-09", "description": "Event 1 description", "url": "http://example.com"},
-        {"title": "Global Political Event 2", "publishedAt": "2024-12-09", "description": "Event 2 description", "url": "http://example.com"},
-        {"title": "Global Political Event 3", "publishedAt": "2024-12-09", "description": "Event 3 description", "url": "http://example.com"}
+        {"event": "Global Politics Summit", "date": "2024-12-01"},
+        {"event": "Climate Change Conference", "date": "2024-12-10"}
     ]
     return jsonify(events)
 
-# Do not run app here for threading purposes
+# Debugging: Print the current working directory to verify the path
+print("Current working directory:", os.getcwd())
+
+# Main block to run the Flask app
 if __name__ == '__main__':
-    app.run(debug=True)  # This is only used in development, remove it for production
+    # Start Flask with Gunicorn in production or debugging mode
+    app.run(debug=True, host='0.0.0.0', port=5000)
