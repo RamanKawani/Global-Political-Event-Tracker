@@ -3,17 +3,26 @@ import requests
 
 app = Flask(__name__)
 
-# Sample API URL for fetching political events (replace with a real API)
-EVENTS_API_URL = 'https://api.example.com/global-political-events'
+# Replace this with your actual API key from NewsAPI (you can sign up for a free account)
+NEWS_API_KEY = 'your_newsapi_key'
+NEWS_API_URL = 'https://newsapi.org/v2/everything'
 
 def fetch_political_events():
     """
-    Function to fetch political events from an API
+    Function to fetch global political events from NewsAPI
     """
+    params = {
+        'q': 'politics',  # Search query for political events
+        'apiKey': NEWS_API_KEY,  # Your API key for NewsAPI
+        'language': 'en',  # Filter results to English
+        'pageSize': 50,  # Adjust the number of results per page
+        'sortBy': 'publishedAt'  # Sort by the most recent events
+    }
+    
     try:
-        response = requests.get(EVENTS_API_URL)
+        response = requests.get(NEWS_API_URL, params=params)
         if response.status_code == 200:
-            return response.json()  # Return the event data in JSON format
+            return response.json()['articles']  # Return the articles section of the response
         else:
             return []
     except Exception as e:
@@ -23,7 +32,7 @@ def fetch_political_events():
 @app.route('/')
 def index():
     """
-    Home route to render political events on the main page
+    Home route to display political events
     """
     events = fetch_political_events()
     return render_template('index.html', events=events)
