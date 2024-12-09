@@ -17,17 +17,19 @@
                 <tr>
                     <th>Date</th>
                     <th>Event</th>
-                    <th>Country</th>
+                    <th>Source</th>
                     <th>Description</th>
+                    <th>Link</th>
                 </tr>
             </thead>
             <tbody>
                 {% for event in events %}
                 <tr>
-                    <td>{{ event.date }}</td>
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.country }}</td>
+                    <td>{{ event.publishedAt }}</td>
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.source.name }}</td>
                     <td>{{ event.description }}</td>
+                    <td><a href="{{ event.url }}" target="_blank">Read More</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -35,3 +37,4 @@
     </main>
 </body>
 </html>
+
