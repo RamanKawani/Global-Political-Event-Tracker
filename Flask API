@@ -1,0 +1,18 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+# Example route to get political events
+@app.route('/api/events')
+def get_events():
+    # This is just sample data; replace with your actual event fetching logic
+    events = [
+        {"title": "Global Political Event 1", "publishedAt": "2024-12-09", "description": "Event 1 description", "url": "http://example.com"},
+        {"title": "Global Political Event 2", "publishedAt": "2024-12-09", "description": "Event 2 description", "url": "http://example.com"},
+        {"title": "Global Political Event 3", "publishedAt": "2024-12-09", "description": "Event 3 description", "url": "http://example.com"}
+    ]
+    return jsonify(events)
+
+# Do not run app here for threading purposes
+if __name__ == '__main__':
+    app.run(debug=True)  # This is only used in development, remove it for production
